@@ -1,6 +1,10 @@
+@tool
 extends Area2D
 
-@export var caught_margin: float = -1
+@export var caught_margin: float = 0:
+	set(value):
+		alarm_timer.wait_time = value
+		update_configuration_warnings()
 
 var player: MainCharacter = null
 
@@ -10,7 +14,6 @@ var player: MainCharacter = null
 
 
 func _ready() -> void:
-	alarm_timer.wait_time = caught_margin
 	color_rect.size = col_shape.shape.size
 	color_rect.position.x = col_shape.position.x - color_rect.size.x / 2
 	color_rect.position.y = col_shape.position.y - color_rect.size.y / 2
@@ -21,6 +24,13 @@ func _process(_delta: float) -> void:
 		return
 
 	Events.update_alarm(alarm_timer.time_left)
+
+
+func _get_configuration_warnings():
+	if alarm_timer.wait_time <= 0:
+		return ["Alarm time hasn't been set."]
+	else:
+		return []
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -42,4 +52,4 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _on_alarm_timer_timeout() -> void:
-	player.caught_alarm()
+	player.take_player_control("caught_alarm")

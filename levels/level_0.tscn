@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=4 uid="uid://dk0pwi3g46lvl"]
 
-[ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="1_vn7o3"]
-[ext_resource type="Texture2D" uid="uid://vfjevfr4ln1y" path="res://levels/tilesheet_complete.png" id="2_jirdo"]
-[ext_resource type="PackedScene" uid="uid://d3wxl2l71iv02" path="res://obstacles/pit.tscn" id="3_bt44k"]
-[ext_resource type="PackedScene" uid="uid://2t08tbg78lrw" path="res://obstacles/alarm_zone.tscn" id="4_kx6l7"]
-[ext_resource type="PackedScene" uid="uid://bysxmuso7bk8d" path="res://UI/ui.tscn" id="5_n46q3"]
+[ext_resource type="PackedScene" uid="uid://d3wxl2l71iv02" path="res://obstacles/pit.tscn" id="1_foxie"]
+[ext_resource type="PackedScene" uid="uid://2t08tbg78lrw" path="res://obstacles/alarm_zone.tscn" id="2_7d3si"]
+[ext_resource type="Texture2D" uid="uid://vfjevfr4ln1y" path="res://levels/tilesheet_complete.png" id="3_jum3j"]
+[ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://player/player.tscn" id="4_c4pne"]
+[ext_resource type="PackedScene" uid="uid://bysxmuso7bk8d" path="res://UI/ui.tscn" id="5_tfamw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bt44k"]
 size = Vector2(31, 76)
@@ -19,7 +19,7 @@ size = Vector2(31, 106)
 size = Vector2(544, 385)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bt44k"]
-texture = ExtResource("2_jirdo")
+texture = ExtResource("3_jum3j")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -898,7 +898,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.121101804, 0.3633424, 0.75383276, 1)
 sources/1 = SubResource("TileSetAtlasSource_bt44k")
 
-[node name="level_1" type="Node2D"]
+[node name="level_0" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
 offset_left = -842.0
@@ -916,7 +916,7 @@ color = Color(0, 0.11043543, 0.28739852, 1)
 
 [node name="Pits" type="Node2D" parent="."]
 
-[node name="Pit" parent="Pits" instance=ExtResource("3_bt44k")]
+[node name="Pit" parent="Pits" instance=ExtResource("1_foxie")]
 position = Vector2(1121, 450)
 rotation = 1.5707964
 
@@ -929,7 +929,7 @@ offset_bottom = 35.0
 [node name="CollisionShape2D" parent="Pits/Pit" index="1"]
 shape = SubResource("RectangleShape2D_bt44k")
 
-[node name="Pit2" parent="Pits" instance=ExtResource("3_bt44k")]
+[node name="Pit2" parent="Pits" instance=ExtResource("1_foxie")]
 position = Vector2(866, 385)
 
 [node name="ColorRect" parent="Pits/Pit2" index="0"]
@@ -941,7 +941,7 @@ offset_bottom = 35.0
 [node name="CollisionShape2D" parent="Pits/Pit2" index="1"]
 shape = SubResource("RectangleShape2D_bt44k")
 
-[node name="Pit3" parent="Pits" instance=ExtResource("3_bt44k")]
+[node name="Pit3" parent="Pits" instance=ExtResource("1_foxie")]
 position = Vector2(699, 323)
 rotation = 1.5707964
 
@@ -955,7 +955,7 @@ offset_bottom = 35.0
 position = Vector2(0, -49)
 shape = SubResource("RectangleShape2D_kx6l7")
 
-[node name="Pit4" parent="Pits" instance=ExtResource("3_bt44k")]
+[node name="Pit4" parent="Pits" instance=ExtResource("1_foxie")]
 position = Vector2(869, 166)
 
 [node name="ColorRect" parent="Pits/Pit4" index="0"]
@@ -967,7 +967,7 @@ offset_bottom = 35.0
 [node name="CollisionShape2D" parent="Pits/Pit4" index="1"]
 shape = SubResource("RectangleShape2D_bt44k")
 
-[node name="Pit5" parent="Pits" instance=ExtResource("3_bt44k")]
+[node name="Pit5" parent="Pits" instance=ExtResource("1_foxie")]
 position = Vector2(868, 52)
 
 [node name="ColorRect" parent="Pits/Pit5" index="0"]
@@ -979,13 +979,20 @@ offset_bottom = 46.0
 [node name="CollisionShape2D" parent="Pits/Pit5" index="1"]
 shape = SubResource("RectangleShape2D_n46q3")
 
-[node name="AlarmZone" parent="." instance=ExtResource("4_kx6l7")]
-position = Vector2(360, 541)
-caught_margin = 10.0
+[node name="Alarms" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" parent="AlarmZone" index="0"]
+[node name="AlarmZone" parent="Alarms" instance=ExtResource("2_7d3si")]
+position = Vector2(360, 541)
+
+[node name="CollisionShape2D" parent="Alarms/AlarmZone" index="0"]
 position = Vector2(-104, -76.5)
 shape = SubResource("RectangleShape2D_btoec")
+
+[node name="ColorRect" parent="Alarms/AlarmZone" index="1"]
+offset_left = -376.0
+offset_top = -269.0
+offset_right = 168.0
+offset_bottom = 116.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -993,14 +1000,14 @@ scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD//woAAQACAAUAAAD//wkAAQACAAUAAAD//wgAAQACAAkAAAD//wcAAQAEAAYAAAD//wYAAQAEAAYAAAD//wUAAQAEAAYAAAD//wQAAQAEAAYAAAD//wMAAQACAAgAAAD//wIAAQACAAUAAAD//wEAAQACAAUAAAD//wAAAQACAAUAAAD/////AQAAAAQAAAAAAP//AQACAAQAAAABAP//AQACAAQAAAACAP//AQACAAQAAAADAP//AQACAAQAAAAEAP//AQACAAQAAAAFAP//AQACAAQAAAAGAP//AQACAAQAAAAHAP//AQACAAQAAAAKAP//AQACAAQAAAALAP//AQACAAQAAAAPAP//AQACAAQAAAAJAP//AQACAAQAAAAIAP//AQACAAQAAAAUAP//AQAAAAQAAAAVAP//AQACAAQAAAAWAP//AQACAAQAAAAXAP//AQACAAQAAAAYAP//AQACAAQAAAD//w0AAQACAAUAAAD//wwAAQACAAUAAAD//wsAAQACAAUAAAD//w4AAQACAAUAAAD//w8AAQACAAUAAAD//xAAAQACAAUAAAD//xEAAQACAAUAAAD//xIAAQACAAUAAAD//xMAAQACAAUAAAD//xQAAQAAAAUAAAAAABQAAQACAAQAAAABABQAAQACAAQAAAACABQAAQACAAQAAAADABQAAQACAAQAAAAEABQAAQACAAQAAAAFABQAAQACAAQAAAAGABQAAQACAAQAAAAHABQAAQACAAQAAAAIABQAAQACAAQAAAAJABQAAQACAAQAAAAKABQAAQACAAQAAAALABQAAQACAAQAAAAMABQAAQACAAQAAAANABQAAQACAAQAAAAOABQAAQACAAQAAAAPABQAAQACAAQAAAAQABQAAQAFAAQAAAAUABQAAQAGAAUAAAAVABQAAQACAAQAAAAWABQAAQACAAQAAAAXABQAAQACAAQAAAAYABQAAQACAAQAAAAZABQAAQACAAQAAAAaABQAAQACAAQAAAAbABQAAQACAAQAAAAcABQAAQACAAQAAAAdABQAAQACAAQAAAAeABQAAQACAAQAAAAfABQAAQACAAQAAAAgABQAAQACAAQAAAAhABQAAQACAAQAAAAiABQAAQACAAQAAAAjABQAAQACAAQAAAAkABQAAQABAAUAAAAkABMAAQACAAUAAAAkABIAAQACAAUAAAAkABEAAQACAAUAAAAZAP//AQACAAQAAAAaAP//AQACAAQAAAAbAP//AQACAAQAAAAcAP//AQACAAQAAAAdAP//AQACAAQAAAAeAP//AQACAAQAAAAfAP//AQACAAQAAAAgAP//AQACAAQAAAAhAP//AQACAAQAAAAiAP//AQACAAQAAAAjAP//AQACAAQAAAAkAP//AQABAAQAAAAkAAAAAQACAAUAAAAkAAEAAQACAAUAAAAkAAIAAQACAAUAAAAkAAMAAQACAAUAAAAkAAQAAQACAAUAAAAkAAUAAQACAAUAAAAkAAYAAQACAAUAAAAkAAcAAQACAAUAAAAkAAgAAQACAAUAAAAkAAkAAQACAAUAAAAkAAoAAQACAAUAAAAkAAsAAQACAAUAAAAkAAwAAQACAAUAAAAkAA0AAQACAAUAAAAkAA4AAQACAAUAAAAkAA8AAQACAAUAAAAkABAAAQACAAUAAAAOAP//AQACAAQAAAANAP//AQACAAQAAAAMAP//AQACAAQAAAAQAAAAAQACAAUAAAAQAAYAAQAFAAUAAAAQAAcAAQACAAUAAAAQAAgAAQAEAAUAAAAQAAkAAQACAAUAAAAQAAoAAQAGAAQAAAAQAA0AAQAFAAUAAAAQAA4AAQACAAUAAAAQAA8AAQACAAUAAAAQABAAAQADAAgAAAAQABEAAQAIAAUAAAAQAP//AQABAAQAAAAQAAEAAQACAAUAAAAQAAIAAQACAAUAAAALAAIAAQAFAAUAAAALAAMAAQACAAUAAAALAAQAAQACAAUAAAAAAAMAAQAIAAQAAAAAAAQAAQAFAAYAAAAAAAUAAQAFAAYAAAAAAAYAAQAFAAYAAAAAAAcAAQAFAAYAAAADAAMAAQAFAAUAAAADAAQAAQACAAUAAAADAAUAAQACAAUAAAADAAYAAQACAAUAAAADAAcAAQACAAUAAAAPABEAAQAFAAcAAAAOABEAAQAFAAcAAAANABEAAQAFAAcAAAAMABEAAQAFAAcAAAALABEAAQAFAAcAAAALABAAAQAEAAcAAAAKABAAAQAEAAcAAAAJABAAAQAEAAgAAAAIABAAAQACAAQAAAAHABAAAQACAAQAAAAGABAAAQACAAQAAAAFABAAAQACAAQAAAAEABAAAQACAAQAAAADABAAAQACAAQAAAACABAAAQAAAAQAAAACABEAAQAGAAQAAAAMABAAAQAEAAcAAAANABAAAQAEAAcAAAAOABAAAQAEAAcAAAAPABAAAQAEAAcAAAAKABEAAQAFAAcAAAAJABEAAQAHAAUAAAAQAAMAAQAGAAQAAAAUAAYAAQAAAAQAAAAVAAYAAQACAAQAAAAWAAYAAQACAAQAAAAXAAYAAQACAAQAAAAYAAYAAQACAAQAAAAZAAYAAQACAAQAAAAUAAMAAQAAAAUAAAAVAAMAAQACAAQAAAAWAAMAAQACAAQAAAAXAAMAAQACAAQAAAAZAAMAAQACAAQAAAAYAAMAAQACAAQAAAAhAAYAAQAIAAUAAAAhAAUAAQAFAAYAAAAhAAQAAQAFAAYAAAAhAAMAAQAIAAQAAAAgAAMAAQAEAAcAAAAfAAMAAQAEAAcAAAAeAAMAAQAHAAQAAAAUABEAAQAAAAUAAAAVABEAAQACAAQAAAAWABEAAQACAAQAAAAXABEAAQACAAQAAAAYABEAAQACAAQAAAAZABEAAQACAAQAAAAAAAgAAQAIAAUAAAADAAgAAQAAAAUAAAAEAAgAAQACAAQAAAAFAAgAAQACAAQAAAAGAAgAAQACAAQAAAAHAAgAAQACAAQAAAAIAAgAAQACAAQAAAAJAAgAAQACAAQAAAAKAAgAAQACAAQAAAALAAgAAQACAAQAAAAMAAgAAQACAAQAAAANAAgAAQACAAQAAAAOAAgAAQACAAQAAAAPAAgAAQACAAQAAAALAAUAAQAGAAQAAAAeAAQAAQAEAAYAAAAeAAUAAQAEAAYAAAAfAAUAAQAGAAYAAAAgAAUAAQAGAAYAAAAgAAQAAQAGAAYAAAAfAAQAAQAGAAYAAAAfAAYAAQAFAAcAAAAeAAYAAQAHAAUAAAAgAAYAAQAFAAcAAAAUAAAAAQACAAUAAAAUAAEAAQACAAUAAAAUAAIAAQACAAUAAAAUAAcAAQACAAUAAAAUAAgAAQACAAUAAAAUAAkAAQACAAUAAAAUAAoAAQAGAAQAAAAUAA0AAQAFAAUAAAAUAA4AAQACAAUAAAAUAA8AAQACAAUAAAAUABAAAQACAAUAAAAaAAYAAQAEAAgAAAAaAAcAAQAEAAYAAAAaAAgAAQAEAAYAAAAaAAkAAQAEAAYAAAAaAAoAAQAHAAUAAAAaAAMAAQACAAQAAAAaAA0AAQAHAAQAAAAaAA4AAQAHAAUAAAAbAA0AAQAEAAcAAAAcAA0AAQAEAAcAAAAdAA0AAQAEAAcAAAAeAA0AAQAEAAcAAAAfAA0AAQAEAAcAAAAgAA0AAQAEAAcAAAAhAA0AAQAIAAQAAAAbAA4AAQAFAAcAAAAcAA4AAQAFAAcAAAAdAA4AAQAFAAcAAAAeAA4AAQAFAAcAAAAfAA4AAQAFAAcAAAAgAA4AAQAFAAcAAAAhAA4AAQAIAAUAAAAbAAYAAQAIAAQAAAAbAAcAAQAFAAYAAAAbAAgAAQAFAAYAAAAbAAkAAQAFAAYAAAAbAAoAAQAIAAUAAAAbAAMAAQAFAAQAAAAaABEAAQACAAQAAAAbABEAAQAFAAQAAAA=")
 tile_set = SubResource("TileSet_kx6l7")
 
-[node name="Player" parent="." instance=ExtResource("1_vn7o3")]
+[node name="Player" parent="." instance=ExtResource("4_c4pne")]
 position = Vector2(591, 655)
 
-[node name="UI" parent="." instance=ExtResource("5_n46q3")]
+[node name="UI" parent="." instance=ExtResource("5_tfamw")]
 
 [editable path="Pits/Pit"]
 [editable path="Pits/Pit2"]
 [editable path="Pits/Pit3"]
 [editable path="Pits/Pit4"]
 [editable path="Pits/Pit5"]
-[editable path="AlarmZone"]
+[editable path="Alarms/AlarmZone"]

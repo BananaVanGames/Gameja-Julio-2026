@@ -24,4 +24,4 @@ func _on_body_exited(body: Node2D) -> void:
 
 func _on_death_margin_timeout() -> void:
 	if player != null:
-		player.fall_down()
+		player.take_player_control("fall_down")

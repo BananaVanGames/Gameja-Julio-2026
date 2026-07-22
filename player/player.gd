@@ -50,7 +50,6 @@ func start_dash() -> void:
 		"Down"
 	)
 
-	# Si tampoco existe una dirección previa, no hace dash
 	if direction == Vector2.ZERO:
 		return
 
@@ -60,21 +59,15 @@ func start_dash() -> void:
 	dash_timer.start()
 
 
-func fall_down() -> void:
-	game_over("fall_down")
-	print("FELL")
-
-
-func caught_alarm() -> void:
-	game_over("caught_alarm")
-	print("CAUGHT")
-
-
-func game_over(animation: String) -> void:
+func take_player_control(animation: String) -> void:
 	set_physics_process(false)
 	anim_player.play(animation)
 	await anim_player.animation_finished
-	print("DEAD")
+
+
+func game_over() -> void:
+	Events.fade_in()
+	await get_tree().create_timer(2).timeout
 	queue_free()
 
 

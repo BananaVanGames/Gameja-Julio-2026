@@ -3,12 +3,25 @@ extends CanvasLayer
 var tween: Tween
 
 @onready var alarm_pop_up: RichTextLabel = $AlarmPopUp
+@onready var black_fade: ColorRect = $BlackFade
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
+	black_fade.modulate.a = 0
 	alarm_pop_up.modulate.a = 0
 	Events.connect("updating_alarm", _updating_alarm)
 	Events.connect("stopping_alarm", _stopping_alarm)
+	Events.connect("fading_out", _fading_out)
+	Events.connect("fading_in", _fading_in)
+
+
+func _fading_out() -> void:
+	anim_player.play("fade_out")
+
+
+func _fading_in() -> void:
+	anim_player.play("fade_in")
 
 
 func _updating_alarm(value: float) -> void:
