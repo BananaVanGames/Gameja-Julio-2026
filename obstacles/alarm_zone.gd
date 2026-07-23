@@ -1,8 +1,9 @@
 @tool
 extends Area2D
 
-@export var caught_margin: float = 0:
+@export var caught_margin: float = 100:
 	set(value):
+		caught_margin = value
 		alarm_timer.wait_time = value
 		update_configuration_warnings()
 
@@ -27,7 +28,7 @@ func _process(_delta: float) -> void:
 
 
 func _get_configuration_warnings():
-	if alarm_timer.wait_time <= 0:
+	if alarm_timer.wait_time == 100:
 		return ["Alarm time hasn't been set."]
 	else:
 		return []

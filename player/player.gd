@@ -13,6 +13,12 @@ var dash_direction := Vector2.ZERO
 @onready var dash_timer: Timer = $DashTimer
 @onready var dash_wait_time: Timer = $DashWaitTime
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var camera_2d: Camera2D = $Camera2D
+
+
+func _ready() -> void:
+	visible = false
+	set_physics_process(false)
 
 
 func _physics_process(_delta: float) -> void:
@@ -34,6 +40,11 @@ func _physics_process(_delta: float) -> void:
 		velocity = direction * speed
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, speed / 7.5)
+
+	if direction.y <= -0.7:
+		camera_2d.drag_vertical_offset = -1
+	elif direction.y >= 0.7:
+		camera_2d.drag_vertical_offset = 1
 
 	if Input.is_action_just_pressed("Dash") and dash_wait_time.is_stopped():
 		dash_wait_time.start()
@@ -59,6 +70,14 @@ func start_dash() -> void:
 	dash_timer.start()
 
 
+func exec_spawn_player() -> void:
+	anim_player.play("spawn_player")
+
+
+func give_player_control() -> void:
+	set_physics_process(true)
+
+
 func take_player_control(animation: String) -> void:
 	set_physics_process(false)
 	anim_player.play(animation)
@@ -67,7 +86,7 @@ func take_player_control(animation: String) -> void:
 
 func game_over() -> void:
 	Events.fade_in()
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	queue_free()
 
 

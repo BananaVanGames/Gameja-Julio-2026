@@ -8,6 +8,7 @@ var tween: Tween
 
 
 func _ready() -> void:
+	black_fade.visible = true
 	black_fade.modulate.a = 0
 	alarm_pop_up.modulate.a = 0
 	Events.connect("updating_alarm", _updating_alarm)
